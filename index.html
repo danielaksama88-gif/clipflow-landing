@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ClipFlow — Ubah 1 Video Panjang Jadi Klip Siap Posting</title>
+<meta name="description" content="ClipFlow memilih momen terbaik dari video panjang, memasang subtitle karaoke dan zoom ke pembicara otomatis. Bayar sekali, tanpa langganan. Untuk Windows dan Mac.">
+<meta property="og:title" content="Masih Edit Klip Manual Berjam-jam Cuma Buat 1 Video?">
+<meta property="og:description" content="ClipFlow: AI pilih momen terbaik, pasang subtitle karaoke, zoom ke pembicara. Bayar sekali, tanpa langganan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B0E17;--card:#111827;--accent:#FFC400;--accent-l:#FFE066;--accent-rgb:255,196,0;
+  --red:#EF4444;--red-rgb:239,68,68;--grn:#10B981;--grn-rgb:16,185,129;
+  --tw:#F1F5F9;--tg:#94A3B8;--td:#64748B;--br:#1E293B;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tw);font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:780px;margin:0 auto;padding:0 24px}
+section{padding:80px 0;border-top:1px solid var(--br)}
+section.first{border-top:0;padding-top:56px}
+h1{font-size:clamp(34px,7vw,56px);line-height:1.1;font-weight:900;letter-spacing:-.02em}
+h2{font-size:clamp(26px,5vw,38px);line-height:1.2;font-weight:800;letter-spacing:-.01em;margin-bottom:18px}
+h3{font-size:19px;font-weight:700;line-height:1.35}
+p{color:var(--tg)}p.lead{font-size:19px;color:var(--tw)}
+.acc{color:var(--accent)}.center{text-align:center}
+.n1{display:inline-block;margin:0 .1em;letter-spacing:0}
+.wrap.wide{max-width:1060px}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:44px;align-items:center}
+.hero-text h1{font-size:clamp(34px,5vw,50px)}
+.price-line{margin-top:14px;font-size:16px;color:var(--tg)}.price-line b{color:var(--accent);font-size:19px}
+.hero-visual{text-align:center}
+.phone-wrap{position:relative;width:260px;margin:0 auto}
+.phone-wrap .phone{width:260px;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.chip{position:absolute;background:var(--card);border:1px solid rgba(var(--accent-rgb),.35);color:var(--tw);font-size:12px;font-weight:700;border-radius:99px;padding:6px 13px;white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.chip.c1{left:50%;top:-15px;transform:translateX(-50%)}.chip.c2{right:-40px;bottom:96px}
+.phone.hero-video{background:#000}
+.phone.hero-video video{width:100%;height:100%;object-fit:cover;display:block}
+.gallery{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 2px 16px;margin-top:18px;scrollbar-width:thin}
+.gcard{flex:0 0 232px;scroll-snap-align:start;margin:0}
+.gcard video{width:232px;aspect-ratio:9/16;border-radius:14px;background:#000;display:block;border:1px solid var(--br)}
+.gcard figcaption{font-size:12px;color:var(--td);margin-top:8px;line-height:1.45}
+.gcard figcaption a{color:var(--tg)}
+.eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+
+/* sticky bar */
+.sticky{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(11,14,23,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--br);transform:translateY(-100%);transition:transform .3s}
+.sticky.show{transform:none}
+.sticky .in{max-width:780px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sticky b{font-size:15px}.sticky span{color:var(--tg);font-size:14px}
+
+/* tombol */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:16px 34px;border-radius:12px;font-weight:800;font-size:18px;color:#0B0E17;text-decoration:none;border:0;cursor:pointer;
+  background:linear-gradient(135deg,var(--accent),var(--accent-l),var(--accent));box-shadow:0 10px 30px rgba(var(--accent-rgb),.28);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(var(--accent-rgb),.38)}
+.btn.sm{min-height:44px;padding:10px 20px;font-size:15px}.btn.full{width:100%}
+.btn.alt{background:transparent;color:var(--grn);border:2px solid var(--grn);box-shadow:none;min-height:50px;font-size:16px}
+.btn.alt:hover{background:rgba(var(--grn-rgb),.1);box-shadow:none}
+.ghost{color:var(--tg);font-size:14px;text-decoration:underline}
+
+/* hero */
+.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:99px;border:1px solid rgba(var(--accent-rgb),.25);background:rgba(var(--accent-rgb),.06);color:var(--accent);font-size:13px;font-weight:700;margin-bottom:22px;animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(var(--accent-rgb),.25)}50%{box-shadow:0 0 0 8px rgba(var(--accent-rgb),0)}}
+.sub{font-size:19px;color:var(--tg);margin:20px 0 28px}.sub b{color:var(--tw)}
+.trust{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:18px;font-size:14px;color:var(--tg)}
+.trust i{font-style:normal;color:var(--grn);margin-right:4px}
+.cta-note{margin-top:12px;font-size:14px;color:var(--td)}
+
+/* list vertikal */
+.list{display:flex;flex-direction:column;gap:12px;margin-top:26px}
+.item{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:12px;background:var(--card);border:1px solid var(--br)}
+.item.bad{background:rgba(var(--red-rgb),.04);border-color:rgba(var(--red-rgb),.14)}
+.item .ic{flex:0 0 28px;font-size:20px;line-height:1.4}
+.item p{color:var(--tw)}.item small{display:block;color:var(--tg);font-size:15px;margin-top:2px}
+.item.ok{background:rgba(var(--grn-rgb),.04);border-color:rgba(var(--grn-rgb),.16)}
+
+/* grid kartu */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.card{background:var(--card);border:1px solid var(--br);border-radius:16px;padding:22px;transition:border-color .2s}
+.card:hover{border-color:rgba(var(--accent-rgb),.4)}
+.card .ic{font-size:26px;margin-bottom:10px}.card h3{margin-bottom:6px}.card p{font-size:15.5px}
+.step{background:var(--card);border:1px solid var(--br);border-radius:16px;padding:22px;margin-top:14px;display:flex;gap:18px}
+.step .n{flex:0 0 auto;font-weight:900;font-size:13px;letter-spacing:.1em;color:var(--accent);padding-top:3px}
+.step h3{margin-bottom:4px}.step p{font-size:16px}
+
+/* mockup ilustrasi */
+.demo{display:grid;grid-template-columns:1fr 280px;gap:22px;align-items:center;margin-top:30px}
+.app{background:var(--card);border:1px solid var(--br);border-radius:16px;overflow:hidden}
+.app .bar{padding:10px 14px;border-bottom:1px solid var(--br);font-size:12px;color:var(--td);display:flex;gap:6px;align-items:center}
+.app .bar i{width:9px;height:9px;border-radius:50%;background:var(--br);display:inline-block}
+.crow{display:flex;gap:10px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--br);font-size:14px}
+.crow:last-child{border:0}.crow .sc{flex:0 0 auto;background:var(--accent);color:#111;font-weight:800;border-radius:8px;padding:2px 9px;font-size:13px}
+.crow b{display:block;color:var(--tw);font-size:14px}.crow span{color:var(--tg);font-size:12.5px}
+.phone{width:240px;margin:0 auto;aspect-ratio:9/16;border-radius:26px;border:6px solid #1f2937;background:linear-gradient(160deg,#1e293b,#0f172a);position:relative;overflow:hidden}
+.phone .hook{position:absolute;top:26px;left:14px;right:14px;text-align:center;font-weight:800;font-size:12.5px;background:#fff;color:#111;padding:4px 8px;border-radius:5px}
+.phone .face{position:absolute;left:50%;top:26%;width:120px;height:120px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle at 50% 40%,#475569,#334155)}
+.phone .body{position:absolute;left:50%;top:50%;width:190px;height:140px;transform:translateX(-50%);border-radius:90px 90px 0 0;background:#334155}
+.phone .cap{position:absolute;bottom:50px;left:10px;right:10px;text-align:center;font-weight:900;font-size:19px;line-height:1.2;color:#fff;text-shadow:0 2px 0 #000,0 0 6px #000}
+.phone .cap b{color:var(--accent)}
+.note{font-size:13px;color:var(--td);margin-top:12px;text-align:center}
+.slot{margin-top:18px;border:1px dashed var(--br);border-radius:12px;padding:18px;text-align:center;color:var(--td);font-size:14px}
+
+/* bonus + harga */
+.bonus{margin-top:14px;background:rgba(var(--accent-rgb),.05);border:1px solid rgba(var(--accent-rgb),.18);border-radius:14px;padding:18px 20px;display:flex;gap:14px}
+.bonus .tag{flex:0 0 auto;font-size:12px;font-weight:800;color:#111;background:var(--accent);border-radius:6px;padding:3px 9px;height:fit-content}
+.bonus h3{font-size:17px;margin-bottom:2px}.bonus p{font-size:15px}
+.price{position:relative;margin-top:44px;background:var(--card);border:2px solid var(--accent);border-radius:24px;padding:44px 28px 30px;text-align:center}
+.price::before{content:attr(data-badge);position:absolute;top:0;left:50%;transform:translate(-50%,-50%);background:var(--accent);color:#111;font-weight:800;font-size:13px;padding:6px 16px;border-radius:99px;white-space:nowrap}
+.price .amt{font-size:clamp(46px,9vw,72px);font-weight:900;color:var(--accent);line-height:1;letter-spacing:-.02em}
+.price .once{color:var(--tg);margin:8px 0 22px}
+.checks{list-style:none;text-align:left;max-width:440px;margin:0 auto 26px;display:flex;flex-direction:column;gap:10px}
+.checks li{display:flex;gap:10px;color:var(--tw);font-size:16px}.checks li::before{content:'✓';flex:0 0 22px;height:22px;border-radius:6px;background:rgba(var(--grn-rgb),.15);color:var(--grn);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:2px}
+.trial{margin-top:18px;padding:16px 18px;border-radius:14px;background:rgba(var(--grn-rgb),.05);border:1px solid rgba(var(--grn-rgb),.2);text-align:left}
+.trial b{color:var(--grn)}
+
+/* faq */
+.faq{margin-top:26px;border-top:1px solid var(--br)}
+.q{border-bottom:1px solid var(--br)}
+.q button{all:unset;box-sizing:border-box;width:100%;display:flex;justify-content:space-between;gap:14px;padding:20px 0;cursor:pointer;font-weight:700;font-size:17px;line-height:1.4}
+.q button::after{content:'▾';color:var(--accent);transition:transform .25s;flex:0 0 auto}
+.q.open button::after{transform:rotate(180deg)}
+.q .a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.q .a p{padding-bottom:20px;font-size:16px}
+
+/* closing */
+.closing{text-align:center;background:radial-gradient(ellipse at 50% 100%,rgba(var(--accent-rgb),.10),transparent 65%)}
+footer{padding:36px 0 56px;border-top:1px solid var(--br);color:var(--td);font-size:13px;text-align:center}
+footer p{color:var(--td);max-width:620px;margin:8px auto 0}
+
+@media(max-width:860px){
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .hero-text h1{font-size:clamp(34px,8vw,48px)}
+  .chip.c2{right:-14px}
+}
+@media(max-width:640px){
+  .phone-wrap,.phone-wrap .phone{width:230px}
+  .gcard{flex-basis:200px}.gcard video{width:200px}
+  .chip{font-size:11px;padding:5px 10px}.chip.c2{right:-6px}
+  body{font-size:16px}section{padding:60px 0}.grid{grid-template-columns:1fr}.demo{grid-template-columns:1fr}
+  .btn{width:100%}.sticky span{display:none}.step{flex-direction:column;gap:6px}.price{padding:40px 20px 26px}
+}
+</style>
+</head>
+<body>
+
+<div class="sticky" id="sticky"><div class="in"><div><b>ClipFlow</b> <span>· 1 video panjang jadi klip siap posting</span></div><a class="btn sm" href="#beli" data-cta>Ambil sekarang</a></div></div>
+
+</div></section>
+
+    <a class="btn full" href="#" id="buy" data-cta>Ambil ClipFlow Sekarang →</a>
+    <p class="cta-note">Pembayaran lewat Order Hero. Banyak metode pembayaran tersedia.</p>
+  </div>
+  <div class="trial"><b>Mau coba dulu?</b> Versi trial gratis memberi 3 klip dengan watermark, jadi kamu bisa menilai sendiri sebelum membeli. Pembelian bersifat final, jadi sebaiknya coba trial dulu.
+    <div style="margin-top:12px"><a class="ghost" href="https://github.com/danielaksama88-gif/clipflow-releases/releases/download/v0.1.3/ClipFlow-Setup-0.1.3.exe">Unduh trial gratis untuk Windows</a> · <a class="ghost" href="https://github.com/danielaksama88-gif/clipflow-releases/releases/download/v0.1.3/ClipFlow-0.1.3-Mac-AppleSilicon.dmg">Mac (chip Apple)</a> · <a class="ghost" href="https://github.com/danielaksama88-gif/clipflow-releases/releases/download/v0.1.3/ClipFlow-0.1.3-Mac-Intel.dmg">Mac (Intel)</a></div></div>
+</div></section>
+
+  <p>Hasil setiap pengguna berbeda dan bergantung pada kualitas video, audio, dan cara pemakaian. Contoh teks, skor, dan tampilan di halaman ini adalah ilustrasi, bukan jaminan hasil. ClipFlow tidak berafiliasi dengan TikTok, Instagram, YouTube, Groq, atau Anthropic.</p>
+</div></footer>
+
+<script>
+  // galeri: hanya satu video yang diputar pada satu waktu
+  var gv=document.querySelectorAll('.gcard video');
+  gv.forEach(function(v){v.addEventListener('play',function(){gv.forEach(function(o){if(o!==v)o.pause()})})});
+  // sticky bar muncul setelah scroll
+  var sb=document.getElementById('sticky');
+  addEventListener('scroll',function(){sb.classList.toggle('show',scrollY>600)},{passive:true});
+  // FAQ: satu terbuka pada satu waktu
+  var qs=document.querySelectorAll('.q');
+  qs.forEach(function(q){q.querySelector('button').addEventListener('click',function(){
+    var open=q.classList.contains('open');
+    qs.forEach(function(o){o.classList.remove('open');o.querySelector('.a').style.maxHeight=null});
+    if(!open){q.classList.add('open');var a=q.querySelector('.a');a.style.maxHeight=a.scrollHeight+'px'}
+  })});
+  // semua CTA lain mengarah ke link checkout bila sudah diisi
+  var buy=document.getElementById('buy');
+  document.querySelectorAll('[data-cta]').forEach(function(a){
+    if(a!==buy){a.addEventListener('click',function(e){var h=buy.getAttribute('href');if(h&&h!=='#'){e.preventDefault();location.href=h}})}
+  });
+</script>
+</body>
+</html>
