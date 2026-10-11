@@ -217,6 +217,8 @@ h1{font-size:clamp(34px,5.5vw,52px);font-weight:900;line-height:1.15;margin-bott
 
 /* ===== TAMBAHAN ClipFlow ===== */
 .n1{display:inline-block;margin:0 .1em;letter-spacing:0}
+.vsl-wrap{width:min(100%,520px);aspect-ratio:1/1;margin:0 auto 12px;border-radius:16px;overflow:hidden;border:2px solid var(--br);box-shadow:0 8px 40px var(--shadow-lg);background:#000}
+.vsl-wrap video{width:100%;height:100%;display:block;object-fit:contain;background:#000}
 .vid-wrap.phone{max-width:290px;aspect-ratio:9/16;border-radius:22px;margin-bottom:12px}
 .vid-wrap.phone video{width:100%;height:100%;object-fit:cover;display:block}
 .gallery{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 2px 16px;margin-top:10px;text-align:left}
@@ -244,8 +246,8 @@ h1{font-size:clamp(34px,5.5vw,52px);font-weight:900;line-height:1.15;margin-bott
   <h1>Masih Edit Klip Manual Berjam&#8209;jam<br><span class="tg">Cuma Buat <span class="n1">1</span> Video?</span></h1>
   <p class="hs"><strong>Tanpa langganan bulanan. Tanpa skill editing.</strong> Untuk podcast, webinar, live, dan video panjang lainnya: ClipFlow memilih momen terbaik, memasang subtitle karaoke, dan zoom ke pembicara. Kamu tinggal cek dan posting.</p>
   <div class="qw"><p>⚡ <strong>Begitu videomu selesai dianalisis</strong>, kamu sudah punya:<br><span class="tg">daftar momen terbaik + hook 3 detik + klip vertikal bersubtitle karaoke</span></p></div>
-  <div class="vid-wrap phone"><video src="https://danielaksama88-gif.github.io/clipflow-landing/media/contoh-2.mp4" poster="https://danielaksama88-gif.github.io/clipflow-landing/media/contoh-2.jpg" autoplay muted loop playsinline controls preload="metadata"></video></div>
-  <p class="vid-label">Contoh hasil ClipFlow dari video <a href="https://youtu.be/iFNQUesOmG4" target="_blank" rel="noopener" style="text-decoration:underline!important">Miracle Sitompul</a> (CC BY)</p>
+  <div class="vsl-wrap"><video id="vsl" controls playsinline preload="metadata" poster="https://danielaksama88-gif.github.io/clipflow-landing/media/vsl.jpg" src="https://danielaksama88-gif.github.io/clipflow-landing/media/vsl.mp4"></video></div>
+  <p class="vid-label">Tonton dulu 1 menit, lihat langsung cara kerjanya. Contoh hasil di video memakai klip dari <a href="https://youtu.be/iFNQUesOmG4" target="_blank" rel="noopener" style="text-decoration:underline!important">Miracle Sitompul</a> (CC BY).</p>
   <a class="cta" href="https://kreasidigi.orderhero.id/form/form-order-clipflow-ai-video" id="buy" data-cta="hero">Ambil ClipFlow Sekarang →<span class="cs">Sekali bayar · Windows &amp; Mac</span></a>
   <p class="note" style="margin-top:18px">Perlu API key Groq (gratis, setup sekali di awal).</p>
   <div class="ps">
